@@ -55,6 +55,8 @@ with requests.session() as s:
         message_numbers = search_thread_for_linux(t)
         for message_number in message_numbers:
             print("https://2ch.hk/" + BOARD_NAME + "/res/" + t["num"] + ".html#" + message_number)
+            image_id = make_json("https://2ch.hk/api/captcha/2chaptcha/id?board=" + BOARD_NAME + "&thread=" + t["num"])["id"]
+            image_address = "https://2ch.hk/api/captcha/2chaptcha/image/" + image_id
         i += 1
 
 s.close()
