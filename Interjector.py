@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import string
 
 
 def make_soup(url):
@@ -52,12 +53,12 @@ with requests.session() as s:
 
     captcha_value = input(image_address+"\nEnter value from the captcha above: ")
 
-    print(s.post("https://2ch.hk/makaba/posting.fcgi?json=1",data={"task":"post","board":"b",
-                                                             "thread":"161694010",
-                                                             "captcha_type":"2chaptcha",
-                                                             "comment":"test-roll",
-                                                             "2chaptcha_id":str(image_id),
-                                                             "2chaptcha_value":str(captcha_value)}).json()["Error"])
+    print(s.post("https://2ch.hk/makaba/posting.fcgi?json=1",files={"task":(None,"post"),"board":(None,"b"),
+                                                             "thread":(None,"161694010"),
+                                                             "captcha_type":(None,"2chaptcha"),
+                                                             "comment":(None,"rolli rolli"),
+                                                             "2chaptcha_id":(None,str(image_id)),
+                                                             "2chaptcha_value":(None,str(captcha_value))}).json()["Error"])
     # thread_catalog = make_json("https://2ch.hk/" + BOARD_NAME + "/threads.json")["threads"]
     # print("There are currently", len(thread_catalog), "threads on /" + BOARD_NAME)
     # i = 0
